@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import classes from "./AvalibleMeals.module.css";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+
   useEffect(() => {
     const fetchMeals = async () => {
       const response = await fetch(
         "https://food-app-f7a33-default-rtdb.firebaseio.com/meals.json"
       );
-      const responseData = await response.json;
+      const responseData = await response.json();
 
       const loadedMeals = [];
 
@@ -22,8 +24,10 @@ const AvailableMeals = () => {
           price: responseData[key].price,
         });
       }
+
       setMeals(loadedMeals);
     };
+
     fetchMeals();
   }, []);
 
