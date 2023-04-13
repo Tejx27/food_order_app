@@ -43,6 +43,12 @@ const Checkout = (props) => {
     if (!formIsValid) {
       return;
     }
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode,
+    });
   };
   const nameControlClasses = `${classes.control} ${
     formInputsValidity.name ? "" : classes.invalid
@@ -58,9 +64,7 @@ const Checkout = (props) => {
   }`;
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
-      <div
-        className={nameControlClasses}
-      >
+      <div className={nameControlClasses}>
         <label htmlFor="name">Your Name</label>
         <input type="text" id="name" ref={nameInputRef} />
         {!formInputsValidity.name && <p>Please enter a valid name!</p>}
